@@ -1,0 +1,57 @@
+{
+  "name": "backend-app",
+  "$schema": "../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "backend-app/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/esbuild:esbuild",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "platform": "node",
+        "outputPath": "dist/backend-app",
+        "format": ["cjs"],
+        "bundle": false,
+        "main": "backend-app/src/main.ts",
+        "tsConfig": "backend-app/tsconfig.app.json",
+        "assets": ["backend-app/src/assets"],
+        "generatePackageJson": true,
+        "esbuildOptions": {
+          "sourcemap": true,
+          "outExtension": {
+            ".js": ".js"
+          }
+        }
+      },
+      "configurations": {
+        "development": {},
+        "production": {
+          "esbuildOptions": {
+            "sourcemap": false,
+            "outExtension": {
+              ".js": ".js"
+            }
+          }
+        }
+      }
+    },
+    "serve": {
+      "dependsOn": ["^build"],
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "backend-app:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "backend-app:build:development"
+        },
+        "production": {
+          "buildTarget": "backend-app:build:production"
+        }
+      }
+    }
+  },
+  "tags": []
+}

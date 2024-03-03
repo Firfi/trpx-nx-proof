@@ -1,0 +1,8 @@
+{
+  "name": "frontend-app",
+  "$schema": "../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "frontend-app/src",
+  "projectType": "application",
+  "targets": {},
+  "tags": []
+}
